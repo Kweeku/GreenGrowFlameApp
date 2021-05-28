@@ -34,7 +34,7 @@ function LogoutScreen({navigation}) {
   <Wallpaper />
   <Screen style={CONTAINER} preset="fixed" backgroundColor={color.transparent}>
         <Header
-        headerText="GreenGrow"
+        headerText="Logout"
         leftIcon="back"
         onLeftPress={goBack}
         style={HEADER}

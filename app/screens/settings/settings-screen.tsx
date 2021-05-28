@@ -95,7 +95,7 @@ function SettingsScreen({navigation}) {
   <Wallpaper />
   <Screen style={CONTAINER} preset="fixed" backgroundColor={color.transparent}>
         <Header
-        headerText="GreenGrow"
+        headerText="Settings"
         leftIcon="back"
         onLeftPress={goBack}
         style={HEADER}

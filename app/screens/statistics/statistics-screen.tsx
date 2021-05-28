@@ -36,7 +36,7 @@ function StatisticsScreen({navigation}) {
   <Wallpaper />
   <Screen style={CONTAINER} preset="fixed" backgroundColor={color.transparent}>
         <Header
-        headerText="GreenGrow"
+        headerText="Statistics"
         leftIcon="back"
         onLeftPress={goBack}
         style={HEADER}

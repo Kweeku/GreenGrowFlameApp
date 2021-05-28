@@ -75,7 +75,7 @@ function HomeScreen({navigation}) {
   <Wallpaper />
   <Screen style={CONTAINER} preset="fixed" backgroundColor={color.transparent}>
         <Header
-        headerText="GreenGrow"
+        headerText="Home"
         leftIcon="dots"
         
         onLeftPress={goDrawer}

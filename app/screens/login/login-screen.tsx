@@ -38,7 +38,7 @@ function LoginScreen({navigation}) {
   <Wallpaper />
   <Screen style={CONTAINER} preset="fixed" backgroundColor={color.transparent}>
         <Header
-        headerText="GreenGrow"
+        headerText="Login"
         leftIcon="back"
         onLeftPress={goBack}
         style={HEADER}
