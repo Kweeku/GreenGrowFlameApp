@@ -12,5 +12,7 @@ export default () => {
     search: require('./SearchRedux').reducer
   })
 
-  return configureStore(rootReducer, rootSaga)
+  let store = configureStore(rootReducer, rootSaga)
+  
+  return store
 }

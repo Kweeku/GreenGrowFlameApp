@@ -7,9 +7,8 @@
 // side effect of breaking other tooling like mobile-center and react-native-rename.
 //
 // It's easier just to leave it here.
-import App from "./app/components/main/main"
-//  import App from "./app/containers/App"
- import './app/config/ReactotronConfig'
+import App from "./app/AppProvider"
+import './app/config/ReactotronConfig'
 import { AppRegistry } from "react-native"
 
 AppRegistry.registerComponent("GreenGrowApp", () => App)

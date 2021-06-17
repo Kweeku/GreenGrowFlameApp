@@ -39,14 +39,14 @@ import { SwitchActions } from "react-navigation";
 // const theme = isDarkTheme ? CustomDarkTheme : CustomDefaultTheme;
 
 
- export default function App() {
+export default function App() {
   // const { style } = props
   // const styles = flatten([CONTAINER, style])
 
-  
+
   return (
     <NavigationContainer>
-    <DrawerNavigation/>
+      <DrawerNavigation />
     </NavigationContainer>
   )
 }
