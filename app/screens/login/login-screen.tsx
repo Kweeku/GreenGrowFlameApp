@@ -1,16 +1,14 @@
 import React from "react"
-import { Wallpaper} from "../../components";
-import { Screen} from "../../components"
+import { Wallpaper, Header, Screen } from "../../components";
 // import { useNavigation } from "@react-navigation/native"
 // import { useStores } from "../../models"
-import { color,spacing } from "../../theme"
-import {Header} from "../../components";
-
-import {TextStyle, View, ViewStyle} from "react-native";
+import { color, spacing } from "../../theme"
+import { TextStyle, View, ViewStyle } from "react-native";
+import Login from './Login.js'
 
 const FULL: ViewStyle = {
   flex: 1,
-  
+
 }
 const CONTAINER: ViewStyle = {
   backgroundColor: color.transparent,
@@ -29,22 +27,23 @@ const HEADER_TITLE: TextStyle = {
   textAlign: "center",
 }
 
-function LoginScreen({navigation}) {
+function LoginScreen({ navigation }) {
 
   const goBack = () => navigation.navigate("home")
 
-  return(
+  return (
     <View testID="SettingsScreen" style={FULL}>
-  <Wallpaper />
-  <Screen style={CONTAINER} preset="fixed" backgroundColor={color.transparent}>
+      <Wallpaper />
+      <Screen style={CONTAINER} preset="fixed" backgroundColor={color.transparent}>
         <Header
-        headerText="Login"
-        leftIcon="back"
-        onLeftPress={goBack}
-        style={HEADER}
-        titleStyle={HEADER_TITLE}
+          headerText="Login"
+          leftIcon="back"
+          onLeftPress={goBack}
+          style={HEADER}
+          titleStyle={HEADER_TITLE}
         />
-     </Screen>
+        <Login />
+      </Screen>
     </View>
   );
 }
