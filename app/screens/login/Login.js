@@ -58,7 +58,7 @@ const Login = () => {
 
                 axios.defaults.baseURL = 'https://api.waziup.io/api/v2';
                 axios.defaults.headers.common['Authorization'] = 'Bearer' + response.data;
-                axios.defaults.headers.post['Content-Type'] = 'application/x-www-form-urlencoded';
+                axios.defaults.headers.post['Content-Type'] = 'application/json;charset=utf-8';
 
                 // upon successful fetch of auth token redirect to home screen below
             })
