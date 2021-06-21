@@ -37,12 +37,12 @@ function LoginScreen({ navigation }) {
       <Screen style={CONTAINER} preset="fixed" backgroundColor={color.transparent}>
         <Header
           headerText="Login"
-          leftIcon="back"
-          onLeftPress={goBack}
+          // leftIcon="back"
+          // onLeftPress={goBack}
           style={HEADER}
           titleStyle={HEADER_TITLE}
         />
-        <Login />
+        <Login onPressLogin={goBack} />
       </Screen>
     </View>
   );

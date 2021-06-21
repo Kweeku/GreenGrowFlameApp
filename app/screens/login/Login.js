@@ -4,17 +4,21 @@ import React from 'react';
 import { View, Text, TouchableOpacity, TextInput, Platform, StyleSheet, Button, Alert } from 'react-native';
 import * as Animatable from 'react-native-animatable';
 import { FontAwesome, Feather } from '@expo/vector-icons';
-import { useNavigation } from '@react-navigation/native';
-
+// import Routes from '../../components/routes/routes'
+import DrawerNavigation from '../../navigators/drawer-navigation/drawer-navigation-navigator'
+import HomeScreen from "../../screens/home/home-screen"
+import BottomTabNavigator from '../../navigators/tabnavigator/tabnavigator-navigator'
+import AsyncStorage from '@react-native-async-storage/async-storage' 
 import { useTheme } from 'react-native-paper';
+import { Component } from 'react';
 const axios = require('axios');
 
-const Login = () => {
-    const navigation = useNavigation()
+
+const Login = ({onPressLogin}) => { 
 
     const [data, setData] = React.useState({
-        username: '',
-        password: '',
+        username: '',   
+        password: '',   
         check_textInputChange: false,
         secureTextEntry: true,
         isValidUser: true,
@@ -34,6 +38,24 @@ const Login = () => {
 
     const updateSecureTextEntry = () => {
         setData({ ...data, secureTextEntry: !data.secureTextEntry });
+    }
+
+    const saveLoginKey = async (isLoggedInValue) => {
+        try {
+            await AsyncStorage.setItem('@isLoggedIn', isLoggedInValue);
+            console.tron.log(isLoggedInValue);
+        } catch (error) {
+            console.tron.log("Error saving data" + error);
+        }
+    }
+
+    const clearLoginKey = async () => {
+        try {
+            AsyncStorage.clear()
+            console.tron.log('Storage successfully cleared!')
+        } catch (error) {
+            console.tron.log('Failed to clear the async storage.')
+        }
     }
 
     const loginHandle = (userName, password) => {
@@ -58,15 +80,17 @@ const Login = () => {
 
                 axios.defaults.baseURL = 'https://api.waziup.io/api/v2';
                 axios.defaults.headers.common['Authorization'] = 'Bearer' + response.data;
-                axios.defaults.headers.post['Content-Type'] = 'application/json;charset=utf-8';
+                axios.defaults.headers.post['Content-Type'] = 'application/x-www-form-urlencoded';
 
                 // upon successful fetch of auth token redirect to home screen below
+                saveLoginKey('true');
             })
             .catch(function (error) {
                 Alert.alert('Invalid User!', 'Username or password is incorrect.', [
                     { text: 'Okay' }
                 ]);
                 console.tron.log(error);
+                clearLoginKey();
             });
     }
 
@@ -163,7 +187,17 @@ const Login = () => {
                 }
 
                 <View style={styles.button}>
-                    <Button color='#251a34' title='Sign In' onPress={() => { loginHandle(data.username, data.password) }} />
+                    <Button color='#251a34' title='Sign In' onPress={() => {
+                     if(data.isValidUser === true){
+                         onPressLogin()
+                     }
+                     else{
+                        Alert.alert('Invalid Credentials', [
+                            { text: 'Okay'   }
+                        ]);
+                     }
+
+                    }} />
                 </View>
             </Animatable.View>
         </View>
