@@ -1,14 +1,13 @@
-import React from "react"
-import { Screen} from "../../components"
-import { Wallpaper} from "../../components";
+import React, { useState, useEffect } from "react"
+import { Screen, Wallpaper, Header } from "../../components"
 // import { useNavigation } from "@react-navigation/native"
 // import { useStores } from "../../models"
-import {Header} from "../../components";
-import {FlatList, TextStyle, View, ViewStyle,Image, ImageBackground} from "react-native"
+import { FlatList, TextStyle, View, ViewStyle, Image, ImageBackground, Alert } from "react-native"
 import { color, spacing } from "../../theme"
 import ItemHomeRow from './ItemHome';
 import { MaterialCommunityIcons } from '@expo/vector-icons';
-import Images from "../../components/images/images"
+import Images from "../../components/images/images";
+import axios from 'axios';
 
 const FULL: ViewStyle = {
   flex: 1,
@@ -22,77 +21,111 @@ const HEADER: TextStyle = {
   paddingTop: spacing[3],
 }
 const HEADER_TITLE: TextStyle = {
-  fontSize: 14,
+  fontSize: 26,
   fontWeight: "bold",
   letterSpacing: 1.5,
-  lineHeight: 15,
+  // lineHeight: 15,
   textAlign: "center",
 }
 const FLAT_LIST: ViewStyle = {
   paddingHorizontal: spacing[2],
 }
 
+let mounted = true;
 
-function HomeScreen({navigation}) {
+function HomeScreen({ navigation }) {
 
-  const DATA = [
+  const goDrawer = () => navigation.toggleDrawer()
+
+  const [device, setDevice] = useState(null);
+  const [loading, setLoading] = useState(false);
+
+  const [state, setState] = useState({
+    humSensor: null,
+    tempSensor: null,
+    illumSensor: null,
+    soilHumSensor: null,
+  })
+
+  const fetchAll = () => {
+    // start spinner
+    setLoading(true);
+
+    // fetch and set relevant data
+    axios({
+      method: 'get',
+      url: `/devices`,
+    })
+      .then(function (response) {
+        // error with fetching devices associated with account hence filtering
+        const devices = response.data.filter(device => device.owner === 'joshuanti102@gmail.com')
+        setDevice(devices[0])
+
+        console.tron.log(devices[0])
+      })
+      .catch(function (error) {
+        Alert.alert('Error!', 'Someething went wrong fetching your devices.', [
+          { text: 'Okay' }
+        ]);
+        console.tron.log(error);
+        setLoading(false)
+      });
+  }
+
+  useEffect(() => {
+    if (mounted) {
+      fetchAll();
+    }
+    if (device) {
+      const humSensor = device.sensors.filter(sensor => sensor.name === 'humiditySensor 1');
+      const tempSensor = device.sensors.filter(sensor => sensor.name === 'temperatureSensor 1');
+      const illumSensor = device.sensors.filter(sensor => sensor.name === 'illuminanceSensor 1');
+      const soilHumSensor = device.sensors.filter(sensor => sensor.name === 'SoilHumidity 1');
+
+      setState({ ...state, humSensor: humSensor[0], tempSensor: tempSensor[0], illumSensor: illumSensor[0], soilHumSensor: soilHumSensor[0] });
+    }
+    return function cleanup() {
+      mounted = false;
+    }
+  }, [device]);
+
+  const DATA = state.tempSensor ? [
     {
       id: 'Tomato',
       image: Images.tomato,
-      sensorVals: { Temperature: 22, Humidity: 55, Water: 23, Light: 10000 }
+      sensorVals: { Temperature: state.tempSensor.value.value, Humidity: state.humSensor.value.value, Water: state.soilHumSensor.value.value, Light: state.illumSensor.value.value }
     },
     {
-      id: 'Lettuce',
-      image: Images.lettuce,
-      sensorVals: { Temperature: 21, Humidity: 75, Water: 50, Light: 8000 }
+      id: 'Strawberry',
+      image: Images.strawberry,
+      sensorVals: { Temperature: state.tempSensor.value.value, Humidity: state.humSensor.value.value, Water: state.soilHumSensor.value.value, Light: state.illumSensor.value.value }
     },
-    {
-      id: 'Cabbage',
-      image: Images.cabbage,
-      sensorVals: { Temperature: 23, Humidity: 35, Water: 33, Light: 11000 }
-    },
-    {
-      id: 'Maize',
-      image: Images.maize,
-      sensorVals: { Temperature: 23.5, Humidity: 65, Water: 50, Light: 7700 }
-    },
-    {
-      id: 'Cassava',
-      image: <MaterialCommunityIcons name='palm-tree' style={{color: '#228B22' }} />,
-      sensorVals: { Temperature: 21.5, Humidity: 80, Water: 53, Light: 9700 }
-    },
-    {
-      id: 'Grapes',
-      image: Images.grapes,
-      sensorVals: { Temperature: 25, Humidity: 14, Water: 23, Light: 1500 }
-    },
-  ];
-  
-  const goDrawer = () => navigation.toggleDrawer()
+  ] : [];
 
-  return(
-<View testID="HomeScreen" style={FULL}>
-  <Wallpaper />
-  <Screen style={CONTAINER} preset="fixed" backgroundColor={color.transparent}>
+  return (
+    <View testID="HomeScreen" style={FULL}>
+      <Wallpaper />
+      <Screen style={CONTAINER} preset="fixed" backgroundColor={color.transparent}>
         <Header
-        headerText="Home"
-        leftIcon="dots"
-        
-        onLeftPress={goDrawer}
-        style={HEADER}
-        titleStyle={HEADER_TITLE}
+          headerText="Home"
+          leftIcon="dots"
+
+          onLeftPress={goDrawer}
+          style={HEADER}
+          titleStyle={HEADER_TITLE}
         />
-      <FlatList
-      contentContainerStyle={FLAT_LIST}
-      data={DATA}
-      extraData={DATA}
-      showsVerticalScrollIndicator={false}
-      // keyExtractor={(item, index) => index.toString()}
-      keyExtractor={(item) => String(item.id)}
-      renderItem={({ item}) => <ItemHomeRow data={item} /> }
-      />
-  </Screen>
-</View>
+        {state.tempSensor &&
+          <FlatList
+            contentContainerStyle={FLAT_LIST}
+            data={DATA}
+            extraData={DATA}
+            showsVerticalScrollIndicator={false}
+            // keyExtractor={(item, index) => index.toString()}
+            keyExtractor={(item) => String(item.id)}
+            renderItem={({ item }) => <ItemHomeRow data={item} />}
+          />}
+      </Screen>
+    </View>
   )
 }
 
