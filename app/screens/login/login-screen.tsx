@@ -20,16 +20,18 @@ const HEADER: TextStyle = {
   color: color.text
 }
 const HEADER_TITLE: TextStyle = {
-  fontSize: 14,
+  fontSize: 28,
   fontWeight: "bold",
   letterSpacing: 1.5,
-  lineHeight: 15,
   textAlign: "center",
 }
 
 function LoginScreen({ navigation }) {
 
-  const goBack = () => navigation.navigate("home")
+  const resetStack = () => navigation.reset({
+    index: 0,
+    routes: [{ name: 'home' }],
+  })
 
   return (
     <View testID="SettingsScreen" style={FULL}>
@@ -42,7 +44,7 @@ function LoginScreen({ navigation }) {
           style={HEADER}
           titleStyle={HEADER_TITLE}
         />
-        <Login onPressLogin={goBack} />
+        <Login onPressLogin={resetStack} />
       </Screen>
     </View>
   );
