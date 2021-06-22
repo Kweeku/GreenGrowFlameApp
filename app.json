@@ -1,7 +1,7 @@
 {
   "expo": {
-    "name": "GreenGrowApp",
-    "slug": "GreenGrowApp",
+    "name": "GreenGrow",
+    "slug": "GreenGrow",
     "version": "1.0.0",
     "orientation": "portrait",
     "icon": "./assets/favicon.png",
@@ -23,7 +23,7 @@
       "favicon": "./assets/favicon.png"
     },
     "android": {
-      "package": "com.kweku.GreenGrowApp"
+      "package": "com.kweku.GreenGrow"
     }
   }
 }
