@@ -177,7 +177,7 @@ function ControlsScreen({ navigation }) {
         />
         <Spinner
           visible={loading} />
-          
+
         {/* implement swipe down to reload next */}
         <View style={{ flexDirection: 'row' }}>
           <Button
@@ -240,5 +240,5 @@ const styles = StyleSheet.create({
     height: 50,
     width: '100%'
   },
-})
+});
 export default ControlsScreen;
