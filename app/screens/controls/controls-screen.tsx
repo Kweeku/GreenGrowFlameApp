@@ -177,7 +177,7 @@ function ControlsScreen({ navigation }) {
         />
         <Spinner
           visible={loading} />
-          
+
         {/* implement swipe down to reload next */}
         <View style={{ flexDirection: 'row' }}>
           <Button
@@ -240,30 +240,5 @@ const styles = StyleSheet.create({
     height: 50,
     width: '100%'
   },
-},
-centered: {
-  alignItems: 'center',
-  justifyContent: 'center'
-},
-button:{
-  alignItems: 'center',
-  justifyContent: 'center',
-  paddingBottom: 50
-},
-dropdown:{
-  alignItems: 'stretch',
-  justifyContent: 'center'
-
-},
-Shutdown: {
-  flex: 1,
-  borderRadius: 8,
-  shadowOffset: { width: 0, height: 3 }
-},
-Picker: {
-  color: color.palette.white,
-  height:50,
-  width: '100%'
-},
-})
+});
 export default ControlsScreen;
