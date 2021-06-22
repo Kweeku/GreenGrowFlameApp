@@ -7,6 +7,7 @@ const Images = {
   cabbage: require('./plants/cabbage.jpg'),
   maize: require('./plants/maize.jpg'),
   grapes: require('./plants/grapes.jpg'),
+  strawberry: require('./plants/strawberry.png'),
 };
 
 export default Images;
