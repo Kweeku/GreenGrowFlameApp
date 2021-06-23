@@ -1,5 +1,5 @@
 import React from "react"
-import { Wallpaper, Header, Screen } from "../../components";
+import { LoginWallpaper, Header, Screen } from "../../components";
 // import { useNavigation } from "@react-navigation/native"
 // import { useStores } from "../../models"
 import { color, spacing } from "../../theme"
@@ -20,7 +20,7 @@ const HEADER: TextStyle = {
   color: color.text
 }
 const HEADER_TITLE: TextStyle = {
-  fontSize: 28,
+  fontSize: 20,
   fontWeight: "bold",
   letterSpacing: 1.5,
   textAlign: "center",
@@ -35,10 +35,10 @@ function LoginScreen({ navigation }) {
 
   return (
     <View testID="SettingsScreen" style={FULL}>
-      <Wallpaper />
+      <LoginWallpaper />
       <Screen style={CONTAINER} preset="fixed" backgroundColor={color.transparent}>
         <Header
-          headerText="Login"
+          headerText="GreenGrow"
           // leftIcon="back"
           // onLeftPress={goBack}
           style={HEADER}

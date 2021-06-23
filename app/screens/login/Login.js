@@ -1,9 +1,10 @@
 /* eslint-disable react-native/no-color-literals */
 /* eslint-disable react-native/no-inline-styles */
 import React, { useEffect } from 'react';
-import { View, Text, TouchableOpacity, TextInput, Platform, StyleSheet, Button, Alert } from 'react-native';
+import {Image, View, Text, TouchableOpacity, TextInput, Platform, StyleSheet, Button, Alert } from 'react-native';
 import * as Animatable from 'react-native-animatable';
 import { FontAwesome, Feather } from '@expo/vector-icons';
+import { color} from "../../theme";
 // import Routes from '../../components/routes/routes'
 import DrawerNavigation from '../../navigators/drawer-navigation/drawer-navigation-navigator'
 import HomeScreen from "../../screens/home/home-screen"
@@ -206,7 +207,7 @@ const Login = props => {
                 }
 
                 <View style={styles.button}>
-                    <Button color='#251a34' title='Sign In' onPress={() => loginHandle(data.username, data.password)} />
+                    <Button color='#123d13' title='Sign In' onPress={() => loginHandle(data.username, data.password)} />
                 </View>
             </Animatable.View>
         </View>

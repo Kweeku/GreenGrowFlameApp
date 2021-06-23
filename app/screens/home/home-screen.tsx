@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react"
-import { Screen, Wallpaper, Header } from "../../components"
+import { Screen, LoginWallpaper, Header } from "../../components"
 // import { useNavigation } from "@react-navigation/native"
 // import { useStores } from "../../models"
 import { FlatList, TextStyle, View, ViewStyle, Image, ImageBackground, Alert } from "react-native"
@@ -21,7 +21,7 @@ const HEADER: TextStyle = {
   paddingTop: spacing[3],
 }
 const HEADER_TITLE: TextStyle = {
-  fontSize: 26,
+  fontSize: 20,
   fontWeight: "bold",
   letterSpacing: 1.5,
   // lineHeight: 15,
@@ -104,7 +104,7 @@ function HomeScreen({ navigation }) {
 
   return (
     <View testID="HomeScreen" style={FULL}>
-      <Wallpaper />
+      <LoginWallpaper />
       <Screen style={CONTAINER} preset="fixed" backgroundColor={color.transparent}>
         <Header
           headerText="Home"

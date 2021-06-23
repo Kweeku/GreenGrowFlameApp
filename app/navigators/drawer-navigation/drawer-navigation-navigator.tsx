@@ -21,18 +21,27 @@ export default function DrawerNavigation() {
 
   const getSavedUsername = async () => {
     try {
-      username = await AsyncStorage.getItem('username') || 'none';
+      username = await AsyncStorage.getItem('username') || '';
     } catch (error) {
       console.tron.log("Error retrieving data" + error);
     }
   };
   const getLoginKey = React.useCallback(async () => {
     try {
-      isLoggedIn = await AsyncStorage.getItem('@isLoggedIn') || 'none';
+      isLoggedIn = await AsyncStorage.getItem('@isLoggedIn') || '';
     } catch (error) {
       console.tron.log("Error retrieving data" + error);
     }
   }, [AsyncStorage]);
+
+  const BoxContainer = props => {
+    return(
+      <View
+      style={{...styles.boxContainer,...props.style}}>
+        {props.children}
+      </View>
+    )
+  }
 
   React.useEffect(() => {
     getLoginKey();
@@ -43,12 +52,12 @@ export default function DrawerNavigation() {
 
   return (
     <Drawer.Navigator
-      drawerContent={props => customDrawerContent(props, username)}
+      drawerContent={props => customDrawerContent(props, username,BoxContainer)}
       drawerType={dimensions.width >= 768 ? 'permanent' : 'front'}
       drawerStyle={{
-        backgroundColor: "#281B34"
+        backgroundColor: color.white
       }}
-      initialRouteName={isLoggedIn === 'true' ? 'LoginScreen' : 'home'}
+      initialRouteName={isLoggedIn === 'true' ?  'home' : 'login'}
     >
       <Drawer.Screen name="home" component={TabNavigator}
         options={{
@@ -102,7 +111,7 @@ export default function DrawerNavigation() {
   )
 }
 
-const customDrawerContent = (props, username) => {
+const customDrawerContent = (props, username, BoxContainer) => {
 
   const clearLoginKey = async () => {
     try {
@@ -134,39 +143,49 @@ const customDrawerContent = (props, username) => {
 
           {username !== '' &&
             <View style={styles.welcomeContainer}>
-              <Text style={styles.welcomeText}>Welcome</Text>
-              <Text style={styles.drawerText}>{username}</Text>
+              {/* <Text style={styles.welcomeText}>Welcome</Text> */}
+              <BoxContainer style={styles.container}>
+              <Text style={styles.userText}>{username}</Text>
+              </BoxContainer>
             </View>
           }
 
+
           <TouchableOpacity style={styles.contactUsContainer} onPress={() => props.navigation.navigate('home')}>
-            <AntDesign name={'home'} size={35} color={'white'} />
+            <AntDesign name={'home'} size={35} color={color.green} />
             <Text style={styles.drawerText}>Home</Text>
           </TouchableOpacity>
 
           <TouchableOpacity style={styles.contactUsContainer} onPress={() => props.navigation.navigate('settings')}>
-            <AntDesign name={'contacts'} size={35} color={'white'} />
+            <MaterialIcons name={'settings'} size={35} color={color.green} />
 
             <Text style={styles.drawerText}>Settings</Text>
           </TouchableOpacity>
+
+          <TouchableOpacity
+        style={styles.contactUsContainer}
+        onPress={() => {
+          // props.navigation.navigate('login');
+          props.navigation.reset({
+            index: 0,
+            routes:[{name: 'login'}]
+          })
+          clearLoginKey();
+        }}>
+           <MaterialIcons name={'logout'} size={35} color={color.green} />
+        <Text style={styles.drawerText}>Sign Out</Text>
+      </TouchableOpacity>
         </DrawerContentScrollView>
       </View>
 
-      <TouchableOpacity
-        style={styles.logoutContainer}
-        onPress={() => {
-          props.navigation.navigate('login');
-          clearLoginKey();
-        }}>
-        <Text style={styles.logoutText}>SIGN OUT</Text>
-      </TouchableOpacity>
+
     </View>
   )
 }
 
 const styles = StyleSheet.create({
   DrawerTextColor: {
-    color: color.text,
+    color: color.green,
     fontWeight: 'bold',
     fontFamily: typography.secondary,
     fontSize: 16
@@ -194,18 +213,42 @@ const styles = StyleSheet.create({
   },
   drawerText: {
     marginLeft: 16,
-    color: 'white',
+    color: color.green,
+    fontSize: 18
+  },
+  userText:{
+    marginLeft: 16,
+    color: color.white,
     fontSize: 18
   },
   welcomeText: {
     marginLeft: 16,
-    color: 'white',
+    color: 'black',
     fontSize: 20,
     marginBottom: 10
   },
   logoutText: {
-    color: 'white',
+    color: color.green,
     fontSize: 18
+  },
+  boxContainer:{ 
+    shadowColor: '#000',
+    shadowOffset: {width: 0, height:2},
+    shadowOpacity: 0.8,
+    shadowRadius:2,
+    height: 100,
+    // margin: 20,
+    alignItems: 'stretch',
+    justifyContent: 'center'
+  },
+  container:{
+    backgroundColor: color.palette.lightGrey,
+    height: 40,
+    borderColor: color.green,
+    resizeMode: 'contain',
+    alignItems: 'stretch',
+    alignContent: 'center',
+    borderWidth: 20
   }
 }
 );

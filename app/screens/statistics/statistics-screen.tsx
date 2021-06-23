@@ -1,10 +1,10 @@
 import React, { useState, useEffect } from "react"
-import { Wallpaper, Screen, Header } from "../../components";
+import { LoginWallpaper, Screen, Header } from "../../components";
 // import { useNavigation } from "@react-navigation/native"
 // import { useStores } from "../../models"
 import { color, spacing, typography } from "../../theme"
 import axios from 'axios'
-import { TextStyle, View, ViewStyle, Alert, Text, Dimensions, Button, ScrollView } from "react-native";
+import { TextStyle, View, ViewStyle, Alert, Text, Dimensions, Button, ScrollView,StyleSheet } from "react-native";
 import moment from 'moment'
 import { LineChart, YAxis, Grid, AreaChart } from 'react-native-svg-charts';
 
@@ -31,7 +31,7 @@ const HEADER: TextStyle = {
   paddingTop: spacing[3],
 }
 const HEADER_TITLE: TextStyle = {
-  fontSize: 26,
+  fontSize: 20,
   fontWeight: "bold",
   letterSpacing: 1.5,
   // lineHeight: 15,
@@ -209,7 +209,7 @@ function StatisticsScreen({ navigation }) {
 
   return (
     <View testID="SettingsScreen" style={FULL}>
-      <Wallpaper />
+      <LoginWallpaper />
       <Screen style={CONTAINER} preset="fixed" backgroundColor={color.transparent}>
         <Header
           headerText="Statistics"
@@ -218,10 +218,12 @@ function StatisticsScreen({ navigation }) {
           style={HEADER}
           titleStyle={HEADER_TITLE}
         />
-        <Text style={[TITLE_WRAPPER, { fontSize: 24 }]}>Crop Data</Text>
+        <Text style={[TITLE_WRAPPER, { fontSize: 19 }]}>Crop Data</Text>
+        <View style={styles.hairline} />
 
         <ScrollView>
           <Text style={TITLE_WRAPPER}>Temperature Chart</Text>
+          <View style={styles.hairline} />
           <View style={{ alignItems: 'center', marginTop: 15 }}>
             {state.tempVals &&
               <View style={{ height: 200, flexDirection: 'row', width: Dimensions.get('screen').width - 35, backgroundColor: '#ffffff', borderRadius: 10, elevation: 3 }}>
@@ -239,6 +241,7 @@ function StatisticsScreen({ navigation }) {
                 <LineChart
                   style={{ flex: 1, marginLeft: 16 }}
                   data={state.tempVals}
+                  
                   svg={{ stroke: 'rgb(134, 65, 244)' }}
                   contentInset={{ top: 20, bottom: 20, right: 20 }}
                 >
@@ -247,8 +250,8 @@ function StatisticsScreen({ navigation }) {
               </View>
             }
           </View>
-
           <Text style={TITLE_WRAPPER}>Humidity Chart</Text>
+          <View style={styles.hairline} />
           <View style={{ alignItems: 'center', marginTop: 15 }}>
             {state.humVals &&
               <View style={{ height: 200, flexDirection: 'row', width: Dimensions.get('screen').width - 35, backgroundColor: '#ffffff', borderRadius: 10, elevation: 3 }}>
@@ -276,6 +279,7 @@ function StatisticsScreen({ navigation }) {
           </View>
 
           <Text style={TITLE_WRAPPER}>Illuminance Chart</Text>
+          <View style={styles.hairline} />
           <View style={{ alignItems: 'center', marginTop: 15 }}>
             {state.illumVals &&
               <View style={{ height: 200, flexDirection: 'row', width: Dimensions.get('screen').width - 35, backgroundColor: '#ffffff', borderRadius: 10, elevation: 3 }}>
@@ -303,6 +307,7 @@ function StatisticsScreen({ navigation }) {
           </View>
 
           <Text style={TITLE_WRAPPER}>Soil Humidity Chart</Text>
+          <View style={styles.hairline} />
           <View style={{ alignItems: 'center', marginTop: 15, marginBottom: 20 }}>
             {state.soilVals &&
               <View style={{ height: 200, flexDirection: 'row', width: Dimensions.get('screen').width - 35, backgroundColor: '#ffffff', borderRadius: 10, elevation: 3 }}>
@@ -333,4 +338,13 @@ function StatisticsScreen({ navigation }) {
     </View>
   );
 }
+const styles = StyleSheet.create({
+  hairline: {
+    borderBottomColor: color.cloud,
+    borderBottomWidth: 1,
+    marginHorizontal: 20,
+    marginTop: 5,
+    // paddingBottom: 30
+  }
+})
 export default StatisticsScreen;

@@ -85,5 +85,6 @@ export const color = {
   border: '#483F53',
   banner: '#5F3E63',
   green: '#123d13',
+  white: '#FFFFFF'
   // text: '#E0D7E5'
 }

@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react"
-import { Wallpaper, Header, Screen } from "../../components";
+import { LoginWallpaper, Header, Screen } from "../../components";
 import { MaterialIcons, MaterialCommunityIcons } from '@expo/vector-icons';
 // import { useNavigation } from "@react-navigation/native"
 // import { useStores } from "../../models"
@@ -35,18 +35,18 @@ const HEADER: TextStyle = {
   paddingTop: spacing[3],
 }
 const HEADER_TITLE: TextStyle = {
-  fontSize: 14,
+  fontSize: 20,
   fontWeight: "bold",
   letterSpacing: 1.5,
-  lineHeight: 15,
+  lineHeight: 20,
   textAlign: "center",
 }
 
 let mounted = true;
 
 function ControlsScreen({ navigation }) {
-
-  const goBack = () => navigation.navigate("home")
+  const goDrawer = () => navigation.toggleDrawer();
+  // const goBack = () => navigation.navigate("home")
   const [selectedValue, setSelectedValue] = useState("T");
   const [loading, setLoading] = useState(false);
 
@@ -165,13 +165,13 @@ function ControlsScreen({ navigation }) {
 
   return (
     <View testID="ControlsScreen" style={FULL}>
-      <Wallpaper />
+      <LoginWallpaper />
 
       <Screen style={CONTAINER} preset="fixed" backgroundColor={color.transparent}>
         <Header
           headerText="Controls"
-          leftIcon="back"
-          onLeftPress={goBack}
+          leftIcon="dots"
+          onLeftPress={goDrawer}
           style={HEADER}
           titleStyle={HEADER_TITLE}
         />
