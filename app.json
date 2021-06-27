@@ -23,7 +23,10 @@
       "favicon": "./assets/favicon.png"
     },
     "android": {
-      "package": "com.kweku.GreenGrow"
-    }
+      "package": "com.kweku.GreenGrow",
+      "versionCode": 1
+    },
+    "description": "Mobile app for GreenGrow Systems.",
+    "githubUrl": "https://github.com/Kweeku/GreenGrowFlameApp/tree/master/app"
   }
 }

@@ -118,7 +118,7 @@ function SettingsScreen({navigation}) {
       renderSectionHeader={({ section: { title} }) => (
         <View
         style= {{
-          backgroundColor: color.banner,
+          backgroundColor: color.ricePaper,
         }}
         >
           <Header

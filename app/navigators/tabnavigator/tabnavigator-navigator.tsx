@@ -18,9 +18,7 @@ const BottomTabNavigator = () => {
       fontSize: 12,
       fontWeight: '700'
     },
-    // style:{
-    // borderTopRadius: 20
-    // }
+
     }}
     >
       <Tab.Screen name="Home" component={HomeNavigator} 
