@@ -4,7 +4,8 @@ rootProject.name = 'GreenGrow'
 apply from: '../gradle.groovy'
 includeUnimodulesProjects()
 
-apply from: file("../node_modules/@react-native-community/cli-platform-android/native_modules.gradle");
+// apply from: file("../node_modules/@react-native-community/cli-platform-android/native_modules.gradle");
+apply from: file("../cli-platform-android/native_modules.gradle");
 applyNativeModulesSettingsGradle(settings)
 
 include ':app'
