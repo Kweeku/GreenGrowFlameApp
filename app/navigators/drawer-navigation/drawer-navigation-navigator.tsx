@@ -4,7 +4,6 @@ import { createDrawerNavigator, DrawerContentScrollView, DrawerItemList, DrawerI
 import { EvilIcons, AntDesign } from '@expo/vector-icons';
 import SettingsScreen from "../../screens/settings/settings-screen";
 import LoginScreen from "../../screens/login/login-screen";
-import LogoutScreen from "../../screens/logout/logout-screen";
 import TabNavigator from "../../navigators/tabnavigator/tabnavigator-navigator"
 import { MaterialIcons } from '@expo/vector-icons';
 import { color, typography } from "../../theme";
@@ -95,16 +94,6 @@ export default function DrawerNavigation() {
             </Text>
           </View>,
         drawerIcon: () => <MaterialIcons name='settings' size={26} color={color.palette.white} />
-      }} />
-
-      <Drawer.Screen name="logout" component={LogoutScreen} options={{
-        drawerLabel: () =>
-          <View>
-            <Text style={styles.DrawerTextColor}>
-              Logout
-            </Text>
-          </View>,
-        drawerIcon: () => <MaterialIcons name='logout' size={26} color={color.palette.white} />
       }} />
 
     </Drawer.Navigator>
