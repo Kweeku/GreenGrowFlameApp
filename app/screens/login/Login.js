@@ -93,8 +93,8 @@ const Login = props => {
                 axios.defaults.headers.post['Content-Type'] = 'application/x-www-form-urlencoded';
 
                 // upon successful fetch of auth token redirect to home screen below
-                saveLoginKey('true');
-                saveUserName(userName);
+                // saveLoginKey('true');
+                // saveUserName(userName);
                 setData({ ...data, check: true })
             })
             .catch(function (error) {
@@ -109,6 +109,7 @@ const Login = props => {
     useEffect(() => {
         if (data.check) {
             props.onPressLogin();
+
         }
         return function cleanup() {
             setData({ ...data, check: false })
