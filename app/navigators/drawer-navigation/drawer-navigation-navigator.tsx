@@ -23,14 +23,14 @@ export default function DrawerNavigation() {
     try {
       username = await AsyncStorage.getItem('username') || '';
     } catch (error) {
-      console.tron.log("Error retrieving data" + error);
+      console.log("Error retrieving data" + error);
     }
   };
   const getLoginKey = React.useCallback(async () => {
     try {
       isLoggedIn = await AsyncStorage.getItem('@isLoggedIn') || '';
     } catch (error) {
-      console.tron.log("Error retrieving data" + error);
+      console.log("Error retrieving data" + error);
     }
   }, [AsyncStorage]);
 
@@ -48,7 +48,7 @@ export default function DrawerNavigation() {
     getSavedUsername();
   }, [getLoginKey, getSavedUsername]
   )
-  console.tron.log(isLoggedIn)
+  console.log(isLoggedIn)
 
   return (
     <Drawer.Navigator
@@ -116,9 +116,9 @@ const customDrawerContent = (props, username, BoxContainer) => {
   const clearLoginKey = async () => {
     try {
       AsyncStorage.clear()
-      console.tron.log('Storage successfully cleared!')
+      console.log('Storage successfully cleared!')
     } catch (error) {
-      console.tron.log('Failed to clear the async storage.')
+      console.log('Failed to clear the async storage.')
     }
   }
 

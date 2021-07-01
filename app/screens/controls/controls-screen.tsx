@@ -76,13 +76,13 @@ function ControlsScreen({ navigation }) {
         // stop spinner
         setLoading(false)
 
-        console.tron.log(devices[0], sensor)
+        console.log(devices[0], sensor)
       })
       .catch(function (error) {
         Alert.alert('Error!', 'Unable to connect to main controls.', [
           { text: 'Okay' }
         ]);
-        console.tron.log(error);
+        console.log(error);
         setLoading(false)
       });
   }
@@ -115,13 +115,13 @@ function ControlsScreen({ navigation }) {
       }
     })
       .then(function (response) {
-        console.tron.log(response)
+        console.log(response)
       })
       .catch(function (error) {
         Alert.alert('Error!', 'Unable to turn off controls. Please check your internet and try again', [
           { text: 'Okay' }
         ]);
-        console.tron.log(error);
+        console.log(error);
       });
   }
 
@@ -132,13 +132,13 @@ function ControlsScreen({ navigation }) {
       [
         {
           text: "Cancel",
-          onPress: () => console.tron.log("Cancel Pressed"),
+          onPress: () => console.log("Cancel Pressed"),
           style: "cancel"
         },
         {
           text: "OK",
           onPress: () => {
-            console.tron.log("OK Pressed");
+            console.log("OK Pressed");
             setSelectedValue(itemValue)
 
             axios({
@@ -150,12 +150,12 @@ function ControlsScreen({ navigation }) {
               }
             })
               .then(function (response) {
-                console.tron.log(response)
+                console.log(response)
                 Toast.show('Success! Crop parameters reset', Toast.LONG);
               })
               .catch(function (error) {
                 Toast.show('Error! Something went wrong trying to reset your crop parameters', Toast.LONG);
-                console.tron.log(error);
+                console.log(error);
               });
           }
         }

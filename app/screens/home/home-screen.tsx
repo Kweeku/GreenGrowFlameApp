@@ -61,13 +61,13 @@ function HomeScreen({ navigation }) {
         const devices = response.data.filter(device => device.owner === 'joshuanti102@gmail.com')
         setDevice(devices[0])
 
-        console.tron.log(devices[0])
+        console.log(devices[0])
       })
       .catch(function (error) {
         Alert.alert('Error!', 'Someething went wrong fetching your devices.', [
           { text: 'Okay' }
         ]);
-        console.tron.log(error);
+        console.log(error);
         setLoading(false)
       });
   }

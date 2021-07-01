@@ -41,30 +41,31 @@ const Login = props => {
         setData({ ...data, secureTextEntry: !data.secureTextEntry });
     }
 
-    const saveLoginKey = async (isLoggedInValue) => {
-        try {
-            await AsyncStorage.setItem('@isLoggedIn', isLoggedInValue);
-            console.tron.log(isLoggedInValue);
-        } catch (error) {
-            console.tron.log("Error saving data" + error);
-        }
-    }
+    // const saveLoginKey = async (isLoggedInValue) => {
+    //     try {
+    //         await AsyncStorage.setItem('@isLoggedIn', isLoggedInValue);
+    //         console.tron.log(isLoggedInValue);
+    //     } catch (error) {
+    //          console.tron.log("Error saving data" + error);
+    //     }
+    // }
 
     const clearLoginKey = async () => {
         try {
             AsyncStorage.clear()
-            console.tron.log('Storage successfully cleared!')
-        } catch (error) {
-            console.tron.log('Failed to clear the async storage.')
+            console.log('Storage successfully cleared!')
+        } 
+        catch (error) {
+            console.log('Failed to clear the async storage.')
         }
     }
 
     const saveUserName = async (userName) => {
         try {
             await AsyncStorage.setItem('username', userName);
-            console.tron.log(userName);
+            console.log(userName);
         } catch (error) {
-            console.tron.log("Error saving data" + error);
+            console.log("Error saving data" + error);
         }
     }
 
@@ -85,7 +86,7 @@ const Login = props => {
             }
         })
             .then(function (response) {
-                console.tron.log(response)
+                console.log(response)
 
                 axios.defaults.baseURL = 'https://api.waziup.io/api/v2';
                 axios.defaults.headers.common['Authorization'] = 'Bearer' + response.data;
@@ -100,7 +101,7 @@ const Login = props => {
                 Alert.alert('Invalid User!', 'Username or password is incorrect.', [
                     { text: 'Okay' }
                 ]);
-                console.tron.log(error);
+                console.log(error);
                 clearLoginKey();
             });
     }

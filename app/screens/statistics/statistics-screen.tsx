@@ -86,7 +86,7 @@ function StatisticsScreen({ navigation }) {
         Alert.alert('Error!', 'Someething went wrong fetching your devices.', [
           { text: 'Okay' }
         ]);
-        console.tron.log(error);
+        console.log(error);
         setLoading(false)
       });
   }
@@ -106,7 +106,7 @@ function StatisticsScreen({ navigation }) {
         Alert.alert('Error!', 'Unable to fetch sensor data', [
           { text: 'Okay' }
         ]);
-        console.tron.log(error);
+        console.log(error);
         setLoading(false)
       });
   }
@@ -123,7 +123,7 @@ function StatisticsScreen({ navigation }) {
         setLoading(false);
       })
       .catch(function (error) {
-        console.tron.log(error);
+        console.log(error);
         setLoading(false)
       });
   }
@@ -140,7 +140,7 @@ function StatisticsScreen({ navigation }) {
         setLoading(false);
       })
       .catch(function (error) {
-        console.tron.log(error);
+        console.log(error);
         setLoading(false)
       });
   }
@@ -157,7 +157,7 @@ function StatisticsScreen({ navigation }) {
         setLoading(false);
       })
       .catch(function (error) {
-        console.tron.log(error);
+        console.log(error);
         setLoading(false)
       });
   }
@@ -194,7 +194,7 @@ function StatisticsScreen({ navigation }) {
         state.tempVals.push(element.value);
         state.tempTime.push(moment(element.timestamp).format('h:mm'));
       })
-      console.tron.log(state.tempVals, state.tempTime)
+      console.log(state.tempVals, state.tempTime)
     }
     if (state.soilData) {
       state.soilData.forEach(element => {
